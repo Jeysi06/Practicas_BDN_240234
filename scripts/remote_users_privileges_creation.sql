@@ -1,47 +1,82 @@
-/* =========================================================
-   CREACIÓN DE USUARIOS
-   ========================================================= */
+/*
+============================================================
+CREACIÓN DE USUARIOS
+============================================================
+*/
 
-CREATE USER IF NOT EXISTS 'marco.ramirez'@'%' IDENTIFIED BY 'qwerty123';
-CREATE USER IF NOT EXISTS 'Mayte.Gayosso'@'%' IDENTIFIED BY '240174';
-CREATE USER IF NOT EXISTS 'Jeysi.Lara'@'%' IDENTIFIED BY '240234';
-CREATE USER IF NOT EXISTS 'Diego_Garrido'@'%' IDENTIFIED BY '240080';
+CREATE USER IF NOT EXISTS 'Jeysi.Lara'@'%'
+IDENTIFIED BY '240234';
+
+CREATE USER IF NOT EXISTS 'marco.ramirez'@'%'
+IDENTIFIED BY 'qwerty123';
+
+CREATE USER IF NOT EXISTS 'Diego.Garrido'@'%'
+IDENTIFIED BY '240709';
+
+CREATE USER IF NOT EXISTS 'Marianna.Gayosso'@'%'
+IDENTIFIED BY '240174';
+
+CREATE USER IF NOT EXISTS 'jhona.leal'@'%'
+IDENTIFIED BY '240603';
+
+CREATE USER IF NOT EXISTS 'oliver.arrioja'@'%'
+IDENTIFIED BY '240615';
+
+CREATE USER IF NOT EXISTS 'mago.conffi'@'%'
+IDENTIFIED BY '240242';
 
 
-/* =========================================================
-   VERIFICAR QUE LOS USUARIOS EXISTEN
-   ========================================================= */
+/*
+============================================================
+VERIFICAR QUE LOS USUARIOS EXISTEN
+============================================================
+*/
 
 SELECT User, Host
 FROM mysql.user
 WHERE User IN (
-    'marco.ramirez',
-    'Mayte.Gayosso',
     'Jeysi.Lara',
-    'Diego_Garrido'
+    'marco.ramirez',
+    'Diego.Garrido',
+    'Marianna.Gayosso',
+    'jhona.leal',
+    'oliver.arrioja',
+    'mago.conffi'
 );
 
 
-/* =========================================================
-   CREACIÓN DE ROLES
-   ========================================================= */
+/*
+============================================================
+CREACIÓN DE ROLES
+============================================================
+*/
 
 CREATE ROLE IF NOT EXISTS 'super_admin';
+
+CREATE ROLE IF NOT EXISTS 'admin';
+
 CREATE ROLE IF NOT EXISTS 'seller';
+
 CREATE ROLE IF NOT EXISTS 'buyer';
+
 CREATE ROLE IF NOT EXISTS 'support';
+
 CREATE ROLE IF NOT EXISTS 'common';
+
 CREATE ROLE IF NOT EXISTS 'user_not_registered';
 
 
-/* =========================================================
-   VERIFICAR QUE LOS ROLES EXISTEN
-   ========================================================= */
+/*
+============================================================
+VERIFICAR QUE LOS ROLES EXISTEN
+============================================================
+*/
 
 SELECT User, Host
 FROM mysql.user
 WHERE User IN (
     'super_admin',
+    'admin',
     'seller',
     'buyer',
     'support',
@@ -50,152 +85,240 @@ WHERE User IN (
 );
 
 
-/* =========================================================
-   PRIVILEGIOS DEL ROL SUPER ADMIN
-   ========================================================= */
+/*
+============================================================
+PRIVILEGIOS DE SUPER ADMIN
+============================================================
+*/
+
+GRANT ALL PRIVILEGES
+ON *.*
+TO 'super_admin'
+WITH GRANT OPTION;
+
+
+/*
+============================================================
+PRIVILEGIOS DE ADMIN
+============================================================
+*/
 
 GRANT ALL PRIVILEGES
 ON db_test_7b.*
-TO 'super_admin';
+TO 'admin';
 
 
-/* =========================================================
-   PRIVILEGIOS DEL ROL SELLER
-   ========================================================= */
+/*
+============================================================
+PRIVILEGIOS DE SELLER
+============================================================
+*/
 
 GRANT SELECT, INSERT, UPDATE, DELETE
 ON db_test_7b.tb_products
 TO 'seller';
 
 
-/* =========================================================
-   PRIVILEGIOS DEL ROL SUPPORT
-   ========================================================= */
+/*
+============================================================
+PRIVILEGIOS DE SUPPORT
+============================================================
+*/
 
-GRANT SELECT, UPDATE, INSERT
-ON db_test_7b.tb_users, db_test_7b.tb_products
+GRANT SELECT, INSERT, UPDATE
+ON db_test_7b.tb_users
+TO 'support';
+
+GRANT SELECT, INSERT, UPDATE
+ON db_test_7b.tb_products
 TO 'support';
 
 
-/* =========================================================
-   PRIVILEGIOS DEL ROL BUYER
-   ========================================================= */
+/*
+============================================================
+PRIVILEGIOS DE BUYER
+============================================================
+*/
 
 GRANT SELECT
 ON db_test_7b.tb_products
 TO 'buyer';
 
 
-/* =========================================================
-   PRIVILEGIOS DEL ROL COMMON
-   ========================================================= */
+/*
+============================================================
+PRIVILEGIOS DE COMMON
+============================================================
+*/
 
 GRANT SELECT
-ON db_test_7b.tb_products
+ON db_test_7b.*
 TO 'common';
 
 
-/* =========================================================
-   QUITAR PRIVILEGIOS DIRECTOS ANTERIORES
-   ========================================================= */
-
-REVOKE ALL PRIVILEGES, GRANT OPTION
-FROM 'Mayte.Gayosso'@'%';
-
-REVOKE ALL PRIVILEGES, GRANT OPTION
-FROM 'Jeysi.Lara'@'%';
-
-REVOKE ALL PRIVILEGES, GRANT OPTION
-FROM 'Diego_Garrido'@'%';
-
-REVOKE ALL PRIVILEGES, GRANT OPTION
-FROM 'marco.ramirez'@'%';
+/*
+============================================================
+ASIGNACIÓN DE ROLES A LOS USUARIOS
+============================================================
+*/
 
 
-/* =========================================================
-   ASIGNACIÓN DE ROLES A USUARIOS
-   ========================================================= */
-
-/* MAYTE = SUPER ADMIN */
+/*
+SUPER ADMIN — JEYSI
+*/
 
 GRANT 'super_admin'
-TO 'Mayte.Gayosso'@'%';
+TO 'Jeysi.Lara'@'%';
 
 
-/* DIEGO = SUPPORT */
+/*
+ADMIN — MARCO
+*/
+
+GRANT 'admin'
+TO 'marco.ramirez'@'%';
+
+
+/*
+SUPPORT — DIEGO
+*/
 
 GRANT 'support'
-TO 'Diego_Garrido'@'%';
+TO 'Diego.Garrido'@'%';
 
 
-/* JEYSI = SELLER */
+/*
+SELLER — MARIANNA
+*/
 
 GRANT 'seller'
-TO 'Jeysi.Lara'@'%';
+TO 'Marianna.Gayosso'@'%';
 
 
-/* =========================================================
-   PERMISOS ADICIONALES PARA JEYSI
-   ========================================================= */
+/*
+BUYER — JHONA
+*/
 
-/* JEYSI PUEDE CONSULTAR LOS LOGS */
-
-GRANT SELECT
-ON db_test_7b.tb_logs
-TO 'Jeysi.Lara'@'%';
+GRANT 'buyer'
+TO 'jhona.leal'@'%';
 
 
-/* JEYSI PUEDE EJECUTAR PROCEDIMIENTOS */
+/*
+COMMON — OLIVER
+*/
 
-GRANT EXECUTE
-ON db_test_7b.*
-TO 'Jeysi.Lara'@'%';
+GRANT 'common'
+TO 'oliver.arrioja'@'%';
 
 
-/* =========================================================
-   ROLES POR DEFECTO
-   ========================================================= */
+/*
+SELLER — MAGO
+*/
+
+GRANT 'seller'
+TO 'mago.conffi'@'%';
+
+
+/*
+============================================================
+ESTABLECER ROLES PREDETERMINADOS
+============================================================
+*/
 
 SET DEFAULT ROLE 'super_admin'
-TO 'Mayte.Gayosso'@'%';
-
-SET DEFAULT ROLE 'support'
-TO 'Diego_Garrido'@'%';
-
-SET DEFAULT ROLE 'seller'
 TO 'Jeysi.Lara'@'%';
 
+SET DEFAULT ROLE 'admin'
+TO 'marco.ramirez'@'%';
 
-/* =========================================================
-   ACTUALIZAR PRIVILEGIOS
-   ========================================================= */
+SET DEFAULT ROLE 'support'
+TO 'Diego.Garrido'@'%';
 
-FLUSH PRIVILEGES;
+SET DEFAULT ROLE 'seller'
+TO 'Marianna.Gayosso'@'%';
+
+SET DEFAULT ROLE 'buyer'
+TO 'jhona.leal'@'%';
+
+SET DEFAULT ROLE 'common'
+TO 'oliver.arrioja'@'%';
+
+SET DEFAULT ROLE 'seller'
+TO 'mago.conffi'@'%';
 
 
-/* =========================================================
-   COMPROBAR PRIVILEGIOS DE LOS USUARIOS
-   ========================================================= */
-
-SHOW GRANTS FOR 'Mayte.Gayosso'@'%';
-
-SHOW GRANTS FOR 'Diego_Garrido'@'%';
+/*
+============================================================
+VERIFICACIÓN DE PRIVILEGIOS DE LOS USUARIOS
+============================================================
+*/
 
 SHOW GRANTS FOR 'Jeysi.Lara'@'%';
 
 SHOW GRANTS FOR 'marco.ramirez'@'%';
 
+SHOW GRANTS FOR 'Diego.Garrido'@'%';
 
-/* =========================================================
-   COMPROBAR PRIVILEGIOS DE LOS ROLES
-   ========================================================= */
+SHOW GRANTS FOR 'Marianna.Gayosso'@'%';
+
+SHOW GRANTS FOR 'jhona.leal'@'%';
+
+SHOW GRANTS FOR 'oliver.arrioja'@'%';
+
+SHOW GRANTS FOR 'mago.conffi'@'%';
+
+
+/*
+============================================================
+VERIFICACIÓN DE PRIVILEGIOS DE LOS ROLES
+============================================================
+*/
 
 SHOW GRANTS FOR 'super_admin';
 
-SHOW GRANTS FOR 'seller';
+SHOW GRANTS FOR 'admin';
 
-SHOW GRANTS FOR 'support';
+SHOW GRANTS FOR 'seller';
 
 SHOW GRANTS FOR 'buyer';
 
+SHOW GRANTS FOR 'support';
+
 SHOW GRANTS FOR 'common';
+
+SHOW GRANTS FOR 'user_not_registered';
+
+
+/*
+============================================================
+VERIFICACIÓN DE USUARIOS Y ROLES
+============================================================
+*/
+
+SELECT
+    TO_USER AS usuario,
+    TO_HOST AS host,
+    FROM_USER AS rol,
+    FROM_HOST AS rol_host
+FROM mysql.role_edges
+WHERE TO_USER IN (
+    'Jeysi.Lara',
+    'marco.ramirez',
+    'Diego.Garrido',
+    'Marianna.Gayosso',
+    'jhona.leal',
+    'oliver.arrioja',
+    'mago.conffi'
+)
+ORDER BY TO_USER, FROM_USER;
+
+
+/*
+============================================================
+MENSAJE DE CONFIRMACIÓN
+============================================================
+*/
+
+SELECT
+    'Los usuarios, roles y privilegios han sido creados correctamente'
+    AS mensaje;
