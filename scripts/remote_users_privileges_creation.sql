@@ -61,7 +61,7 @@ CREATE ROLE IF NOT EXISTS 'buyer';
 
 CREATE ROLE IF NOT EXISTS 'support';
 
-CREATE ROLE IF NOT EXISTS 'common';
+CREATE ROLE IF NOT EXISTS 'common_user';
 
 CREATE ROLE IF NOT EXISTS 'user_not_registered';
 
@@ -80,7 +80,7 @@ WHERE User IN (
     'seller',
     'buyer',
     'support',
-    'common',
+    'common_user',
     'user_not_registered'
 );
 
@@ -123,14 +123,22 @@ TO 'seller';
 ============================================================
 PRIVILEGIOS DE SUPPORT
 ============================================================
+
+MAGO SOLO PUEDE TRABAJAR CON tb_users.
+
+Puede:
+- SELECT
+- INSERT
+- UPDATE
+
+No puede:
+- DELETE
+- Acceder/modificar tb_products
+============================================================
 */
 
 GRANT SELECT, INSERT, UPDATE
-ON db_test_7b.tb_users
-TO 'support';
-
-GRANT SELECT, INSERT, UPDATE
-ON db_test_7b.tb_products
+ON db_test_7b.tb_user
 TO 'support';
 
 
@@ -147,13 +155,13 @@ TO 'buyer';
 
 /*
 ============================================================
-PRIVILEGIOS DE COMMON
+PRIVILEGIOS DE COMMON_USER
 ============================================================
 */
 
 GRANT SELECT
 ON db_test_7b.*
-TO 'common';
+TO 'common_user';
 
 
 /*
@@ -204,10 +212,10 @@ TO 'jhona.leal'@'%';
 
 
 /*
-COMMON — OLIVER
+COMMON USER — OLIVER
 */
 
-GRANT 'common'
+GRANT 'common_user'
 TO 'oliver.arrioja'@'%';
 
 
@@ -225,23 +233,58 @@ ESTABLECER ROLES PREDETERMINADOS
 ============================================================
 */
 
+
+/*
+DAMARI — SUPER ADMIN
+*/
+
 SET DEFAULT ROLE 'super_admin'
 TO 'Damari'@'%';
+
+
+/*
+MARCO — ADMIN
+*/
 
 SET DEFAULT ROLE 'admin'
 TO 'marco.ramirez'@'%';
 
+
+/*
+DIEGO — SELLER
+*/
+
 SET DEFAULT ROLE 'seller'
 TO 'Diego'@'%';
+
+
+/*
+MAY — SELLER
+*/
 
 SET DEFAULT ROLE 'seller'
 TO 'May'@'%';
 
+
+/*
+JHONA — BUYER
+*/
+
 SET DEFAULT ROLE 'buyer'
 TO 'jhona.leal'@'%';
 
-SET DEFAULT ROLE 'common'
+
+/*
+OLIVER — COMMON USER
+*/
+
+SET DEFAULT ROLE 'common_user'
 TO 'oliver.arrioja'@'%';
+
+
+/*
+MAGO — SUPPORT
+*/
 
 SET DEFAULT ROLE 'support'
 TO 'mago.conffi'@'%';
@@ -284,7 +327,7 @@ SHOW GRANTS FOR 'buyer';
 
 SHOW GRANTS FOR 'support';
 
-SHOW GRANTS FOR 'common';
+SHOW GRANTS FOR 'common_user';
 
 SHOW GRANTS FOR 'user_not_registered';
 
@@ -315,10 +358,52 @@ ORDER BY TO_USER, FROM_USER;
 
 /*
 ============================================================
+VERIFICAR ESPECÍFICAMENTE A MAGO
+============================================================
+*/
+
+SHOW GRANTS FOR 'mago.conffi'@'%';
+
+
+/*
+============================================================
+VERIFICAR LOS PRIVILEGIOS DE SUPPORT
+============================================================
+*/
+
+SHOW GRANTS FOR 'support';
+
+
+/*
+============================================================
+VERIFICAR QUE MAGO PUEDE TRABAJAR CON TB_USERS
+============================================================
+
+Debe tener:
+SELECT
+INSERT
+UPDATE
+
+============================================================
+*/
+
+
+/*
+============================================================
+VERIFICAR LA EXISTENCIA DE TB_USERS
+============================================================
+*/
+
+SHOW TABLES
+FROM db_test_7b;
+
+
+/*
+============================================================
 MENSAJE DE CONFIRMACIÓN
 ============================================================
 */
 
 SELECT
-    'Los usuarios, roles y privilegios han sido creados correctamente'
+    'Los usuarios, roles y privilegios han sido creados correctamente. Mago tiene el rol support y acceso únicamente a tb_users.'
     AS mensaje;
