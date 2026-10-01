@@ -4,16 +4,16 @@ CREACIÓN DE USUARIOS
 ============================================================
 */
 
-CREATE USER IF NOT EXISTS 'Jeysi.Lara'@'%'
+CREATE USER IF NOT EXISTS 'Damari'@'%'
 IDENTIFIED BY '240234';
 
 CREATE USER IF NOT EXISTS 'marco.ramirez'@'%'
 IDENTIFIED BY 'qwerty123';
 
-CREATE USER IF NOT EXISTS 'Diego.Garrido'@'%'
+CREATE USER IF NOT EXISTS 'Diego'@'%'
 IDENTIFIED BY '240709';
 
-CREATE USER IF NOT EXISTS 'Marianna.Gayosso'@'%'
+CREATE USER IF NOT EXISTS 'May'@'%'
 IDENTIFIED BY '240174';
 
 CREATE USER IF NOT EXISTS 'jhona.leal'@'%'
@@ -35,10 +35,10 @@ VERIFICAR QUE LOS USUARIOS EXISTEN
 SELECT User, Host
 FROM mysql.user
 WHERE User IN (
-    'Jeysi.Lara',
+    'Damari',
     'marco.ramirez',
-    'Diego.Garrido',
-    'Marianna.Gayosso',
+    'Diego',
+    'May',
     'jhona.leal',
     'oliver.arrioja',
     'mago.conffi'
@@ -164,11 +164,11 @@ ASIGNACIÓN DE ROLES A LOS USUARIOS
 
 
 /*
-SUPER ADMIN — JEYSI
+SUPER ADMIN — DAMARI
 */
 
 GRANT 'super_admin'
-TO 'Jeysi.Lara'@'%';
+TO 'Damari'@'%';
 
 
 /*
@@ -180,19 +180,19 @@ TO 'marco.ramirez'@'%';
 
 
 /*
-SUPPORT — DIEGO
-*/
-
-GRANT 'support'
-TO 'Diego.Garrido'@'%';
-
-
-/*
-SELLER — MARIANNA
+SELLER 1 — DIEGO
 */
 
 GRANT 'seller'
-TO 'Marianna.Gayosso'@'%';
+TO 'Diego'@'%';
+
+
+/*
+SELLER 2 — MAY
+*/
+
+GRANT 'seller'
+TO 'May'@'%';
 
 
 /*
@@ -212,10 +212,10 @@ TO 'oliver.arrioja'@'%';
 
 
 /*
-SELLER — MAGO
+SUPPORT — MAGO
 */
 
-GRANT 'seller'
+GRANT 'support'
 TO 'mago.conffi'@'%';
 
 
@@ -226,16 +226,16 @@ ESTABLECER ROLES PREDETERMINADOS
 */
 
 SET DEFAULT ROLE 'super_admin'
-TO 'Jeysi.Lara'@'%';
+TO 'Damari'@'%';
 
 SET DEFAULT ROLE 'admin'
 TO 'marco.ramirez'@'%';
 
-SET DEFAULT ROLE 'support'
-TO 'Diego.Garrido'@'%';
+SET DEFAULT ROLE 'seller'
+TO 'Diego'@'%';
 
 SET DEFAULT ROLE 'seller'
-TO 'Marianna.Gayosso'@'%';
+TO 'May'@'%';
 
 SET DEFAULT ROLE 'buyer'
 TO 'jhona.leal'@'%';
@@ -243,7 +243,7 @@ TO 'jhona.leal'@'%';
 SET DEFAULT ROLE 'common'
 TO 'oliver.arrioja'@'%';
 
-SET DEFAULT ROLE 'seller'
+SET DEFAULT ROLE 'support'
 TO 'mago.conffi'@'%';
 
 
@@ -253,13 +253,13 @@ VERIFICACIÓN DE PRIVILEGIOS DE LOS USUARIOS
 ============================================================
 */
 
-SHOW GRANTS FOR 'Jeysi.Lara'@'%';
+SHOW GRANTS FOR 'Damari'@'%';
 
 SHOW GRANTS FOR 'marco.ramirez'@'%';
 
-SHOW GRANTS FOR 'Diego.Garrido'@'%';
+SHOW GRANTS FOR 'Diego'@'%';
 
-SHOW GRANTS FOR 'Marianna.Gayosso'@'%';
+SHOW GRANTS FOR 'May'@'%';
 
 SHOW GRANTS FOR 'jhona.leal'@'%';
 
@@ -302,10 +302,10 @@ SELECT
     FROM_HOST AS rol_host
 FROM mysql.role_edges
 WHERE TO_USER IN (
-    'Jeysi.Lara',
+    'Damari',
     'marco.ramirez',
-    'Diego.Garrido',
-    'Marianna.Gayosso',
+    'Diego',
+    'May',
     'jhona.leal',
     'oliver.arrioja',
     'mago.conffi'

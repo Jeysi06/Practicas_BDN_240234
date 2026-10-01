@@ -1,12 +1,12 @@
-LOAD DATA LOCAL INFILE '"C:\Users\larac\Documents\7  cuatri\marco\Practicas_BDN_240234\seeds\carga_5k_productos_seller2_7B.sql"'
+LOAD DATA LOCAL INFILE 'C:/Users/larac/Documents/7  cuatri/marco/Practicas_BDN_240234/seeds/tb_products_5000_n.csv'
 INTO TABLE tb_products
 CHARACTER SET utf8mb4
 FIELDS TERMINATED BY ','
 OPTIONALLY ENCLOSED BY '"'
 LINES TERMINATED BY '\n'
-IGNORE 1 LINES
+IGNORE 1 ROWS
 (
-    ID,
+    @id,
     SKU,
     name,
     description,
