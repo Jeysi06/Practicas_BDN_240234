@@ -81,68 +81,38 @@ ORDER BY TO_USER, FROM_USER;
 SHOW PROCEDURE STATUS
 WHERE Db = 'db_test_7b';
 
-
 /* ============================================================
    10. VERIFICACIÓN DE PRODUCTOS
    ============================================================ */
 
-/* Contabilizar los productos */
-
-SELECT COUNT(*)
+SELECT COUNT(*) AS total_productos
 FROM tb_products;
-
-
-/* Visualizar todos los productos */
-
-SELECT *
-FROM tb_products;
-
-
-/* Consulta para saber la trazabilidad de los productos */
-
-SELECT *
-FROM vw_trazabilidad_productos
-LIMIT 10;
-
 
 /* ============================================================
-   CONSULTA DE TRAZABILIDAD DE USER Y ROLES
+   11. CONTABILIZAR TODOS LOS PRODUCTOS
    ============================================================ */
 
-/*
-   Verificar qué usuario de la base de datos
-   insertó a qué usuario de la plataforma ecommerce,
-   agregando el rol del SGBD.
-*/
+SELECT COUNT(*) FROM tb_products;
 
-SELECT
-    u.nick,
-    u.email,
-    b.db_user AS inserted_by,
-    GROUP_CONCAT(
-        DISTINCT re.FROM_USER
-        ORDER BY re.FROM_USER
-        SEPARATOR ', '
-    ) AS roles,
-    b.operation_description,
-    b.operation_date
-FROM tb_user u
+/* ============================================================
+   12. CONSULTA PARA SABER LA TRAZABILIDAD DE LOS PRODUCTOS
+   ============================================================ */
 
-JOIN tb_logs b
-    ON b.operation_description LIKE CONCAT('%', u.nick, '%')
-   AND b.operation_description LIKE CONCAT('%', u.email, '%')
+SELECT *
+FROM vw_trazabilidad_productos ORDER BY creation_date 
+DESC LIMIT 10;
 
-LEFT JOIN mysql.role_edges re
-    ON re.TO_USER = SUBSTRING_INDEX(b.db_user, '@', 1)
+/* ============================================================
+   13. CONSULTA LA TRAZABILIDAD DE USUARIOS
+   ============================================================ */
 
-WHERE b.table_operation = 'Create'
-  AND b.table_name = 'tb_user'
+SELECT *
+FROM vw_trazabilidad_usuarios ORDER BY
+creation_date ASC;
 
-GROUP BY
-    u.nick,
-    u.email,
-    b.db_user,
-    b.operation_description,
-    b.operation_date
+/* ============================================================
+   14. CONTABILIZAR CUANTOS PRODUCTOS POR TABLA HAY POR USUARIOS
+   ============================================================ */
 
-ORDER BY b.operation_date ASC;
+SELECT COUNT(*), vp.insert_by FROM vw_trazabilidad_productos vp
+GROUP BY vp.inserted_by;
