@@ -99,7 +99,7 @@ SELECT COUNT(*) FROM tb_products;
    ============================================================ */
 
 SELECT *
-FROM vw_trazabilidad_productos ORDER BY creation_date 
+FROM vw_trazabilidad_productos ORDER BY operation_date 
 DESC LIMIT 10;
 
 /* ============================================================
@@ -108,11 +108,11 @@ DESC LIMIT 10;
 
 SELECT *
 FROM vw_trazabilidad_usuarios ORDER BY
-creation_date ASC;
+operation_date ASC;
 
 /* ============================================================
    14. CONTABILIZAR CUANTOS PRODUCTOS POR TABLA HAY POR USUARIOS
    ============================================================ */
 
-SELECT COUNT(*), vp.insert_by FROM vw_trazabilidad_productos vp
+SELECT COUNT(*), vp.inserted_by FROM vw_trazabilidad_productos vp
 GROUP BY vp.inserted_by;
