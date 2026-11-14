@@ -4,17 +4,17 @@
 
 **Docente:** M.T.I. Marco A. Ramírez Hernández  
 **Periodo:** Septiembre – Diciembre de 2026  
-**Identificador:** 240234
+**Identificador del proyecto:** 240234
 
 ---
 
 ### Tabla de prácticas de la asignatura
 
-|No.| Nombre | Descripción | Potenciador | Estatus |
-|---|---|---|---|---|
-|1.|Metodología de Evaluación de la Materia| Transcribir en libreta y comprender la metodología y fechas de evaluación de la asignatura| 5| 🟢 Conlcuida |
-|2.|Conexiones Remotas para Bases de Datos SQL| Crear y administrar usuarios y privilegios para conexiones desde internet o redes locales|?? |🟡 En progreso|
+| No. | Nombre de la práctica | Descripción | Potenciador | Estatus |
+|:---:|---|---|:---:|:---:|
+| 1 | **Metodología de Evaluación de la Asignatura** | Análisis y comprensión de la metodología de evaluación, los criterios, las actividades y las fechas establecidas para la asignatura. | 5 | 🟢 Concluida |
+| 2 | [**Conexiones Remotas y Gestión de Datos en MySQL**](practica02/readme.md) | Configuración de conexiones remotas mediante TCP/IP, creación de usuarios y roles, asignación de privilegios y gestión de información en MySQL. | 60 | 🟢 Concluida |
+| 3 | [**Manipulación de Datos en Conexiones Remotas a Bases de Datos Relacionales**](practica03/readme.md) | Administración de una base de datos para un entorno de comercio electrónico (*E-Commerce*), mediante tablas relacionadas, vistas, triggers, procedimientos almacenados, funciones, eventos, auditoría y carga masiva de datos. | 100 | 🟢 Concluida |
+| 4 | **Examen Práctico: Instalación de PostgreSQL y MySQL en un VPS** | Instalación, configuración y despliegue de los motores PostgreSQL y MySQL en un servidor privado virtual (VPS), incluyendo pruebas de funcionamiento y conexiones remotas con datos de prueba. | Por definir | 🟡 En progreso |
 
-
-
-
+---

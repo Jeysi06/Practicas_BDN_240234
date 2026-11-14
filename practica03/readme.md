@@ -1,79 +1,38 @@
 # Práctica 03: Manipulación de Datos en Conexiones Remotas a Bases de Datos Relacionales
 
-**Base de datos:** `db_test_7b`  
-**Motor:** MySQL Server  
-**Herramientas:** MySQL Workbench, Git, GitHub y Archify  
 **Rama de desarrollo:** `Practica03`  
-**Identificador del proyecto:** `240234`
-
-## 1. Descripción general
-
-En esta práctica se desarrolló la administración y manipulación de una base de datos relacional utilizando MySQL Server y conexiones remotas mediante TCP/IP.
-
-El trabajo se enfocó en la implementación de una base de datos orientada a un entorno de comercio electrónico, incorporando estructuras para la gestión de usuarios, productos, categorías, vendedores, compradores, pedidos y demás operaciones relacionadas.
-
-Asimismo, se implementaron mecanismos de seguridad, auditoría, automatización y generación de datos de prueba para comprobar el funcionamiento de la base de datos.
-
-## 2. Actividades desarrolladas
-
-- **Diseño y estructura de la base de datos:** creación e integración de tablas con sus respectivas claves primarias, claves foráneas, relaciones y restricciones.
-- **Administración de usuarios y permisos:** creación de cuentas de acceso y configuración de roles para establecer distintos niveles de privilegios dentro de `db_test_7b`.
-- **Control de acceso remoto:** configuración de usuarios y permisos para realizar operaciones mediante conexiones TCP/IP.
-- **Auditoría de operaciones:** implementación de triggers para registrar las operaciones de inserción, actualización y eliminación en la tabla `tb_logs`.
-- **Creación de vistas SQL:** desarrollo de vistas para consultar información de las entidades y facilitar el seguimiento de las operaciones realizadas en la base de datos.
-- **Procedimientos almacenados y funciones:** implementación de rutinas para automatizar procesos, registrar información y generar datos de prueba.
-- **Eventos programados:** configuración de eventos de MySQL para ejecutar tareas automatizadas cuando corresponda.
-- **Carga masiva de información:** generación e inserción de datos de prueba para usuarios, productos y categorías, considerando la distribución de productos entre vendedores.
-- **Validación de datos:** ejecución de consultas para comprobar registros, relaciones, permisos, operaciones de auditoría y funcionamiento de los objetos SQL.
-- **Respaldos de la base de datos:** generación de copias de seguridad que permitan conservar la estructura, los registros y los objetos implementados.
-- **Documentación técnica:** elaboración del Modelo Entidad-Relación Extendido (MERE) y del diccionario de datos mediante Archify.
-- **Control de versiones:** organización y seguimiento de los archivos SQL y modificaciones del proyecto mediante Git y GitHub.
-
-## 3. Organización del proyecto
-
-La práctica se organiza mediante archivos SQL y recursos de documentación que permiten identificar y administrar los diferentes componentes de la base de datos.
-
-Entre los elementos principales se consideran:
-
-- Scripts de creación de tablas y relaciones.
-- Scripts de creación de usuarios, roles y privilegios.
-- Triggers y mecanismos de auditoría.
-- Vistas para consultas y trazabilidad.
-- Procedimientos almacenados y funciones.
-- Eventos programados.
-- Scripts de inserción y generación de datos.
-- Consultas de validación.
-- Respaldos de la base de datos.
-- Documentación del MERE y diccionario de datos.
-
-## 4. Documentación técnica
-
-La documentación del proyecto se encuentra organizada para facilitar la consulta de la estructura y las características de la base de datos.
-
-- **Modelo Entidad-Relación Extendido (MERE):** [Consultar diagrama de la base de datos](PEGA_AQUI_TU_ENLACE_DEL_MERE).
-- **Diccionario de datos:** [Consultar diccionario de datos](PEGA_AQUI_TU_ENLACE_DEL_DICCIONARIO).
-- **Repositorio de GitHub:** [Consultar código fuente y scripts SQL](PEGA_AQUI_TU_ENLACE_DE_GITHUB).
-
-
-## 5. Resultados
-
-Como resultado de la práctica, se desarrolló una base de datos relacional para un escenario de comercio electrónico, integrando mecanismos de administración de usuarios, control de privilegios, auditoría y automatización mediante objetos de MySQL.
-
-También se trabajó con la carga masiva de datos de prueba, la administración de conexiones remotas y la validación de la información almacenada. Finalmente, se organizó el proyecto mediante control de versiones y documentación técnica, facilitando su mantenimiento y comprensión.
-
-## 6. Tecnologías y herramientas utilizadas
-
-| Tecnología o herramienta | Aplicación |
-|---|---|
-| MySQL Server | Administración y gestión de la base de datos |
-| MySQL Workbench | Ejecución y validación de consultas SQL |
-| Git | Control de versiones |
-| GitHub | Almacenamiento y seguimiento del proyecto |
-| Archify | Elaboración del MERE y diccionario de datos |
-| TCP/IP | Conexiones remotas a MySQL |
+**Motor de base de datos:** MySQL Server  
+**Herramientas:** MySQL Workbench, Archify, Git y GitHub.
 
 ---
 
-**Proyecto académico:** Práctica 03 – Bases de Datos Relacionales  
-**Base de datos:** `db_test_7b`  
-**Identificador:** `240234`
+## 1. Descripción general
+
+En esta práctica se realizaron actividades de administración y manipulación de datos en una base de datos relacional MySQL mediante conexiones remotas TCP/IP. Se trabajó con la estructura de la base de datos, el control de acceso, la automatización de operaciones, la auditoría y la carga masiva de datos.
+
+## 2. Actividades realizadas
+
+- **Estructura de la base de datos:** integración y validación de 25 tablas, incluyendo sus claves primarias, foráneas y restricciones.
+- **Control de acceso:** creación y configuración de 7 roles con diferentes niveles de permisos para la administración y operación remota.
+- **Auditoría:** implementación de 72 triggers para registrar operaciones de inserción, actualización y eliminación en la tabla `tb_logs`.
+- **Vistas SQL:** creación de 25 vistas para consultas de información y seguimiento de operaciones.
+- **Procedimientos y funciones:** desarrollo de rutinas para automatizar operaciones y generar datos de prueba.
+- **Eventos programados:** configuración de tareas automatizadas mediante el planificador de eventos de MySQL.
+- **Carga masiva de datos:** inserción de 7,500 usuarios y más de 7,000 productos mediante conexiones remotas.
+- **Validación:** ejecución de consultas para comprobar la integridad referencial, los registros generados y el funcionamiento de los objetos de la base de datos.
+- **Respaldos:** generación de copias de seguridad que incluyen estructura, datos y objetos programados de MySQL.
+- **Documentación:** elaboración y actualización del Modelo Entidad-Relación Extendido (MERE) y del diccionario de datos.
+- **Control de versiones:** organización de los archivos y cambios de la práctica mediante Git y GitHub.
+
+## 3. Documentación técnica
+
+Los siguientes recursos permiten consultar la estructura y documentación de la base de datos:
+
+- [Diagrama Entidad-Relación Extendido (MERE)](https://jeysi06.github.io/Practicas_BDN_240234/practica03/docs/Diagrama_ER_Interactivo/)
+- [Diccionario de datos](https://jeysi06.github.io/Practicas_BDN_240234/practica03/docs/Diccionario_Datos/)
+
+---
+
+## 4. Resultados
+
+Se integró una base de datos relacional con mecanismos de control de acceso, auditoría y automatización. También se realizaron cargas masivas de datos de prueba, verificaciones de integridad y documentación técnica para facilitar la comprensión y administración de su estructura.
