@@ -1,3 +1,4 @@
+
 /*
 ============================================================
 CREACIÓN DE USUARIOS, ROLES Y PRIVILEGIOS
@@ -207,20 +208,34 @@ TO 'common_user';
 
 PUEDE:
 - CONSULTAR PRODUCTOS.
-- EJECUTAR EL PROCEDIMIENTO DE REGISTRO.
+- EJECUTAR sp_register_new_user MEDIANTE SU ROL.
+- EJECUTAR sp_register_new_user DIRECTAMENTE DESDE app_web.
+- EJECUTAR sp_register_new_user DIRECTAMENTE DESDE app_mobile.
 
 NO TIENE PERMISOS GENERALES DE INSERCIÓN,
 ACTUALIZACIÓN O ELIMINACIÓN.
 ============================================================
 */
 
+-- Permiso de consulta de productos para el rol
 GRANT SELECT
 ON db_test_7b.tb_products
 TO 'user_not_registered';
 
+-- Permiso de ejecución del procedimiento para el rol
 GRANT EXECUTE
 ON PROCEDURE db_test_7b.sp_register_new_user
 TO 'user_not_registered';
+
+-- Permiso directo para la aplicación web
+GRANT EXECUTE
+ON PROCEDURE db_test_7b.sp_register_new_user
+TO 'app_web'@'%';
+
+-- Permiso directo para la aplicación móvil
+GRANT EXECUTE
+ON PROCEDURE db_test_7b.sp_register_new_user
+TO 'app_mobile'@'%';
 
 
 /*
@@ -494,10 +509,21 @@ AND Name = 'sp_register_new_user';
 
 /*
 ============================================================
-25. MENSAJE DE CONFIRMACIÓN
+25. VERIFICACIÓN DE PERMISOS DIRECTOS DE MIDDLEWARE
+============================================================
+*/
+
+SHOW GRANTS FOR 'app_web'@'%';
+
+SHOW GRANTS FOR 'app_mobile'@'%';
+
+
+/*
+============================================================
+26. MENSAJE DE CONFIRMACIÓN
 ============================================================
 */
 
 SELECT
-    'Los usuarios, roles y privilegios han sido configurados. Se incorporaron los usuarios de middleware, el procedimiento de registro y los permisos adicionales de support.'
+    'Los usuarios, roles y privilegios han sido configurados. app_web y app_mobile tienen permiso EXECUTE directo sobre sp_register_new_user.'
     AS mensaje;
